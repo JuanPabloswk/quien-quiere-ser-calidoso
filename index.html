@@ -3,25 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Quiz Millonario</title>
+  <title>Quien quiere ser calidoso</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="stage">
     <header class="header">
-      <h1>QUIZ <span class="gold">MILLONARIO</span></h1>
-      <div class="controls">
-        <button id="addQuestionBtn" class="small">➕ Agregar pregunta</button>
-        <div class="lifelines">
-          <button id="fiftyBtn" class="lifeline">50/50</button>
-          <button id="callBtn" class="lifeline">📞 Llamar</button>
-          <button id="audBtn" class="lifeline">👥 Público</button>
-        </div>
+      <h1>QUIEN QUIERE SER <span class="gold">CALIDOSO</span></h1>
+      <div class="money-card">
+        <div class="money-title">Puntos Acumulados</div>
+        <div id="pointsDisplay" class="points-display">0 puntos</div>
       </div>
     </header>
 
     <main class="game">
       <section class="left">
+        <div class="timer-container">
+          <div id="timerBar" class="timer-bar"></div>
+        </div>
         <div class="question-card">
           <div id="questionText" class="question">Pregunta por defecto...</div>
           <div id="options" class="options">
@@ -37,19 +36,81 @@
             <button id="nextBtn" class="primary" onclick="nextQuestion()">Siguiente pregunta</button>
           </div>
         </div>
+        
+        <div class="lifelines-container">
+          <button id="fiftyBtn" class="lifeline">50/50</button>
+          <button id="callBtn" class="lifeline">📞 Llamar</button>
+          <button id="audBtn" class="lifeline">👥 Público</button>
+        </div>
       </section>
-
-      <aside class="right">
-        <div class="money-title">Premios</div>
-        <ul id="moneyList" class="money-list"></ul>
-      </aside>
     </main>
 
     <footer class="footer">
-      <small>Quiz Millonario — versión web (propia, no oficial)</small>
+      <small>.</small>
     </footer>
   </div>
 
+  <!-- Modal de Reglas del Juego -->
+  <div id="rulesModal" class="modal">
+    <div class="modal-content rules-modal">
+      <h2>Oportunidades que se brindarán</h2>
+      <div class="rules-content">
+        <p>La idea es que no miremos las notas o apuntes que tengamos tampoco se puede averiguar de ninguna manera.</p>
+        <p>Parte del juego es ser realmente sincero con usted mismo.</p>
+        <p><strong>Solo Se puede usar:</strong></p>
+        <ul class="rules-list">
+          <li>50/50</li>
+          <li>Llamada A Un Amigo</li>
+          <li>Ayuda del Público</li>
+        </ul>
+      </div>
+      <button id="startGameBtn" class="primary">Iniciar</button>
+    </div>
+  </div>
+
+  <!-- Modal de Perdiste -->
+  <div id="loseModal" class="modal">
+    <div class="modal-content">
+      <h2>¡Perdiste!</h2>
+      <p>Has respondido incorrectamente. El juego se ha reiniciado.</p>
+      <button id="restartBtn" class="primary">Jugar de nuevo</button>
+    </div>
+  </div>
+
+  <!-- Modal de Llamar -->
+  <div id="callModal" class="modal">
+    <div class="modal-content">
+      <h2>📞 Llamada al amigo</h2>
+      <p style="margin-top: 16px; color: var(--muted);">Presiona para continuar</p>
+      <button id="closeCallBtn" class="primary blue">Continuar</button>
+    </div>
+  </div>
+
+  <!-- Modal de Público -->
+  <div id="audienceModal" class="modal">
+    <div class="modal-content">
+      <h2>👥 Consulta al público</h2>
+      <p style="margin-top: 16px; color: var(--muted);">Presiona para continuar</p>
+      <button id="closeAudienceBtn" class="primary blue">Continuar</button>
+    </div>
+  </div>
+
+  <!-- Audio del reloj (oculto) -->
+  <audio id="relojSound" loop>
+    <source src="RelojSound.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Audio de acierto (oculto) -->
+  <audio id="aciertoSound">
+    <source src="Acierto.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Audio de error (oculto) -->
+  <audio id="errorSound">
+    <source src="Error.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="questions.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
