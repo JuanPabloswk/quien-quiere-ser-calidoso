@@ -1,30 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>¿Quién quiere ser millonario?</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quiz Millonario - Web</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <div class="container">
-    <h1>¿Quién quiere ser millonario?</h1>
-
-    <div id="game">
-      <p id="question"></p>
-
-      <div id="options">
-        <button class="option-btn" onclick="selectAnswer(0)"></button>
-        <button class="option-btn" onclick="selectAnswer(1)"></button>
-        <button class="option-btn" onclick="selectAnswer(2)"></button>
-        <button class="option-btn" onclick="selectAnswer(3)"></button>
+  <div class="stage">
+    <header class="header">
+      <h1>QUIEN QUIERE SER <span class="gold">MILLONARIO</span></h1>
+      <div class="controls">
+        <button id="addQuestionBtn" class="small">➕ Agregar pregunta</button>
+        <div class="lifelines">
+          <button id="fiftyBtn" class="lifeline">50/50</button>
+          <button id="callBtn" class="lifeline">📞 Llamar</button>
+          <button id="audBtn" class="lifeline">👥 Público</button>
+        </div>
       </div>
+    </header>
 
-      <p id="status"></p>
+    <main class="game">
+      <section class="left">
+        <div class="question-card">
+          <div id="questionText" class="question">Pregunta por defecto...</div>
+          <div id="options" class="options">
+            <button class="opt" data-i="0" onclick="selectAnswer(0)"><span class="opt-letter">A</span><span class="opt-text"></span></button>
+            <button class="opt" data-i="1" onclick="selectAnswer(1)"><span class="opt-letter">B</span><span class="opt-text"></span></button>
+            <button class="opt" data-i="2" onclick="selectAnswer(2)"><span class="opt-letter">C</span><span class="opt-text"></span></button>
+            <button class="opt" data-i="3" onclick="selectAnswer(3)"><span class="opt-letter">D</span><span class="opt-text"></span></button>
+          </div>
 
-      <button id="nextBtn" onclick="nextQuestion()">Siguiente pregunta</button>
-    </div>
+          <div id="feedback" class="feedback"></div>
+
+          <div class="nav">
+            <button id="nextBtn" class="primary" onclick="nextQuestion()">Siguiente pregunta</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="right">
+        <div class="money-title">Premios</div>
+        <ul id="moneyList" class="money-list"></ul>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <small>Plantilla web - basada en tu PowerPoint</small>
+    </footer>
   </div>
 
   <script src="script.js"></script>
