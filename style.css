@@ -1,0 +1,42 @@
+body {
+  background: #0f044c;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+#game {
+  margin-top: 20px;
+}
+
+.option-btn {
+  display: block;
+  margin: 10px auto;
+  padding: 12px 40px;
+  background: #141e61;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.option-btn:hover {
+  background: #787a91;
+}
+
+#nextBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  background: #ffcc29;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  display: none;
+}
