@@ -1,13 +1,3 @@
-const moneySteps = [
-  "1 puntos","2 puntos","3 puntos","4 puntos","5 puntos",
-  "5.000.000","7.000.000","10.000.000","50.000.000","100.000.000",
-  "150.000.000","250.000.000","500.000.000","1.000.000.000","1.500.000.000"
-]
-
-// Guardar el array original para poder reiniciarlo
-const originalMoneySteps = [...moneySteps];
-
-let index = 0; // Índice para los premios (moneySteps)
 let questionIndex = 0; // Índice para las preguntas
 let canAnswer = true;
 let usedFifty = false;
@@ -32,17 +22,6 @@ function renderMoney() {
   if (pointsDisplay) {
     pointsDisplay.textContent = accumulatedPoints + ' puntos';
   }
-}
-
-// Función para extraer el valor numérico de un string de puntos
-function extractPointsValue(pointsString) {
-  // Remover puntos, espacios y "puntos" del string
-  let clean = pointsString.replace(/\./g, '').replace(/\s/g, '').replace(/puntos/gi, '');
-  // Si es solo un número, devolverlo
-  if (!isNaN(clean) && clean !== '') {
-    return parseInt(clean);
-  }
-  return 0;
 }
 
 function startTimer() {
@@ -216,12 +195,9 @@ function selectAnswer(i){
       aciertoSound.play().catch(e => console.log('Error al reproducir audio de acierto:', e));
     }
     
-    // Sumar puntos del premio actual
-    if (index < moneySteps.length) {
-      const pointsToAdd = extractPointsValue(moneySteps[index]);
-      accumulatedPoints += pointsToAdd;
-      renderMoney();
-    }
+    // Sumar 2 puntos por cada respuesta correcta
+    accumulatedPoints += 2;
+    renderMoney();
     
     btns.forEach(b => b.disabled = true);
     nextBtn.style.display = 'inline-block';
@@ -253,18 +229,11 @@ function resetGame() {
   // Marcar que el juego no ha comenzado
   gameStarted = false;
   
-  // Reiniciar el índice de premios
-  index = 0;
-  
   // Reiniciar el índice de preguntas
   questionIndex = 0;
   
   // Reiniciar puntos acumulados
   accumulatedPoints = 0;
-  
-  // Restaurar el array original de moneySteps
-  moneySteps.length = 0;
-  moneySteps.push(...originalMoneySteps);
   
   // Reiniciar las ayudas
   usedFifty = false;
@@ -356,9 +325,8 @@ function hideAudienceModal() {
 }
 
 function nextQuestion(){
-  // Solo avanza el índice del premio si la respuesta fue correcta
+  // Solo avanza el índice de preguntas si la respuesta fue correcta
   if(lastAnswerCorrect){
-    index++;
     questionIndex++;
   }
   
