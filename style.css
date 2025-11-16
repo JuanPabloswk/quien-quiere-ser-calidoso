@@ -20,6 +20,12 @@ body{
 .header{display:flex;align-items:center;justify-content:space-between;gap:15px}
 .header h1{margin:0;font-size:48px;letter-spacing:1px;flex:1;}
 .header .gold{color:var(--gold);font-weight:700}
+.header .logo-img{
+  max-height:80px;
+  max-width:200px;
+  object-fit:contain;
+  margin:0 15px;
+}
 .header .money-card{
   min-width:250px;
   padding:15px;
@@ -151,15 +157,51 @@ body{
   width:90%;
 }
 .rules-modal{
-  max-width:700px;
+  max-width:750px;
   text-align:left;
-  padding:30px;
+  padding:20px;
   max-height:90vh;
-  overflow-y:auto;
+  overflow-y:hidden;
+}
+.rules-container{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  align-items:flex-start;
+  margin:15px 0;
+}
+.rules-content-left{
+  width:100%;
+  line-height:1.6;
+}
+.rules-content-left p{
+  margin:10px 0;
+  color:var(--muted);
+  font-size:16px;
+}
+.rules-content-right{
+  width:75%;
+  display:flex;
+  flex-direction:row;
+  align-items:flex-start;
+  gap:20px;
+}
+.rules-image{
+  flex:0 0 auto;
+}
+.molly-img{
+  max-width:220px;
+  max-height:300px;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  margin-top:-40px;
 }
 .rules-content{
-  margin:20px 0;
+  flex:1;
   line-height:1.6;
+  margin:0;
+  text-align:left;
 }
 .rules-content p{
   margin:10px 0;
@@ -192,7 +234,7 @@ body{
 }
 .rules-modal .primary{
   display:inline-block;
-  margin-top:15px;
+  margin-top:12px;
   width:100%;
 }
 .modal-content h2{
@@ -203,8 +245,8 @@ body{
 }
 .rules-modal h2{
   color:var(--gold);
-  font-size:36px;
-  margin-bottom:15px;
+  font-size:32px;
+  margin-bottom:12px;
 }
 .modal-content p{
   color:var(--muted);
