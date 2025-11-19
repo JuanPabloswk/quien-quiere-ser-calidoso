@@ -1,4 +1,5 @@
 let questionIndex = 0; // Índice para las preguntas
+let randomQuestionOrder = []; // Array con el orden aleatorio de las preguntas
 let canAnswer = true;
 let usedFifty = false;
 let usedCall = false;
@@ -16,6 +17,16 @@ const nextBtn = document.getElementById('nextBtn');
 const relojSound = document.getElementById('relojSound'); // Audio del reloj
 const aciertoSound = document.getElementById('aciertoSound'); // Audio de acierto
 const errorSound = document.getElementById('errorSound'); // Audio de error
+
+function generateRandomQuestionOrder() {
+  // Crear un array con todos los índices de las preguntas
+  randomQuestionOrder = Array.from({ length: questions.length }, (_, i) => i);
+  // Mezclar el array de forma aleatoria (algoritmo Fisher-Yates)
+  for (let i = randomQuestionOrder.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [randomQuestionOrder[i], randomQuestionOrder[j]] = [randomQuestionOrder[j], randomQuestionOrder[i]];
+  }
+}
 
 function renderMoney() {
   const pointsDisplay = document.getElementById('pointsDisplay');
@@ -147,7 +158,9 @@ function resumeTimer() {
 }
 
 function loadQuestion(){
-  const q = questions[questionIndex];
+  // Usar el índice aleatorio para obtener la pregunta
+  const actualQuestionIndex = randomQuestionOrder[questionIndex];
+  const q = questions[actualQuestionIndex];
   qText.innerText = q.question;
   // Resetear el color del texto de la pregunta
   qText.style.color = '';
@@ -180,7 +193,9 @@ function selectAnswer(i){
   // Detener el temporizador cuando se responde
   stopTimer();
   
-  const q = questions[questionIndex];
+  // Usar el índice aleatorio para obtener la pregunta
+  const actualQuestionIndex = randomQuestionOrder[questionIndex];
+  const q = questions[actualQuestionIndex];
   const btns = Array.from(document.getElementsByClassName('opt'));
   canAnswer = false;
 
@@ -231,6 +246,9 @@ function resetGame() {
   
   // Reiniciar el índice de preguntas
   questionIndex = 0;
+  
+  // Regenerar el orden aleatorio de preguntas
+  generateRandomQuestionOrder();
   
   // Reiniciar puntos acumulados
   accumulatedPoints = 0;
@@ -345,7 +363,9 @@ function nextQuestion(){
 document.getElementById('fiftyBtn').addEventListener('click', ()=>{
   if(usedFifty) return;
   usedFifty = true;
-  const q = questions[questionIndex];
+  // Usar el índice aleatorio para obtener la pregunta
+  const actualQuestionIndex = randomQuestionOrder[questionIndex];
+  const q = questions[actualQuestionIndex];
   const btns = Array.from(document.getElementsByClassName('opt'));
   let wrongIndexes = [0,1,2,3].filter(i=> i!== q.correct);
   wrongIndexes = wrongIndexes.sort(()=>0.5 - Math.random()).slice(0,2);
@@ -406,6 +426,8 @@ document.getElementById('startGameBtn').addEventListener('click', ()=>{
 
 // init
 (function init(){
+  // Generar el orden aleatorio de preguntas al inicio
+  generateRandomQuestionOrder();
   const btns = Array.from(document.getElementsByClassName('opt'));
   btns.forEach((b,i)=>{ if(!b.querySelector('.opt-text').innerText) b.querySelector('.opt-text').innerText = ''; });
   renderMoney();
